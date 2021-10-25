@@ -26,7 +26,7 @@ export const stripIrrelevantInfobaeCurrenciesAndSortThem = (
 export const getInfobaeMarkdown = (
   infobaeRelevantCurrencies: IInfobaeCurrency[]
 ) => {
-  return `🇦🇷 Argentina: \n ${infobaeRelevantCurrencies
+  return `🇦🇷 Argentina: \n${infobaeRelevantCurrencies
     .map(
       (infobaeCurrency) =>
         `*${infobaeCurrency.currency}*: ${infobaeCurrency.unico}`
@@ -35,7 +35,7 @@ export const getInfobaeMarkdown = (
 };
 
 export const getCryptoMarkdown = (coingeckoEntries: any[]) => {
-  return `🦎 Coingecko: \n ${coingeckoEntries
+  return `🦎 Coingecko: \n${coingeckoEntries
     .map(
       ([cryptoName, val]) => `*${capitalize(cryptoName)}*: ${val.usd} (USD) \n`
     )
