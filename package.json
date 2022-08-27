@@ -21,7 +21,6 @@
     "@types/aws-lambda": "^8.10.102",
     "@types/node": "^16.11.56",
     "@types/serverless": "^1.78.44",
-    "esbuild": "^0.15.5",
     "serverless-offline": "^9.2.6",
     "serverless-plugin-common-excludes": "^4.0.0",
     "serverless-plugin-include-dependencies": "^5.0.0",
