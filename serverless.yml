@@ -4,26 +4,22 @@ service: botardo
 frameworkVersion: "3"
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   region: us-west-2
   environment:
     CLIENT_ID: ${env:CLIENT_ID}
     CLIENT_SECRET: ${env:CLIENT_SECRET}
 
 functions:
-  botardo:
-    handler: src/botardo.handler
+  blue:
+    handler: ./src/blue.handler
     events:
       - http:
-          path: botardo
-          method: post
+          path: blue
+          method: any
 
-  oauth:
-    handler: src/oauth.handler
-    events:
-      - http:
-          path: oauth
-          method: get
 plugins:
-  - serverless-offline
   - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
