@@ -1,5 +1,7 @@
+org: gerardosabetta
+app: botardo
 service: botardo
-frameworkVersion: "2"
+frameworkVersion: "3"
 provider:
   name: aws
   runtime: nodejs12.x
