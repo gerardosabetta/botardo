@@ -2,7 +2,6 @@ import axios from "axios";
 import { KnownBlock } from "@slack/types";
 import { DOLARITO_PRICES_URL } from "./constants";
 import { DolaritoResponse } from "./types";
-import { table } from "table";
 import { capitalize } from "./utils";
 import {
   APIGatewayEvent,
@@ -30,66 +29,20 @@ export const handler: APIGatewayProxyHandler = async (
       }
     );
 
-    const tableHeaders = ["Cotizacion", "Compra", "Venta", "Variacion"];
-
-    const responseTable = table(
-      [
-        tableHeaders,
-        ...Object.values(
-          dolaritoResponse
-        ).map(({ name, buy, sell, variation }) => [
-          capitalize(name),
-          formater.format(+buy.replace(",", ".")),
-          formater.format(+sell.replace(",", ".")),
-          variation
-            ? `${variation.includes("-") ? "▼" : "▲"} ${variation.replace(
-                "-",
-                ""
-              )}%`
-            : "",
-        ]),
-      ],
-      {
-        singleLine: true,
-        header: {
-          content: "Cotizaciones Argentina",
-        },
-        columnDefault: {
-          alignment: "center",
-          width: 15,
-        },
-        border: {
-          topBody: `─`,
-          topJoin: `┬`,
-          topLeft: `┌`,
-          topRight: `┐`,
-
-          bottomBody: `─`,
-          bottomJoin: `┴`,
-          bottomLeft: `└`,
-          bottomRight: `┘`,
-
-          bodyLeft: `│`,
-          bodyRight: `│`,
-          bodyJoin: `│`,
-
-          joinBody: `─`,
-          joinLeft: `├`,
-          joinRight: `┤`,
-          joinJoin: `┼`,
-        },
-      }
-    );
-
     const responseBlocks: KnownBlock[] = [
       {
-        type: "context",
-        elements: [
-          {
+        type: "section",
+        fields: Object.values(dolaritoResponse).map(
+          ({ name, buy, sell, variation, spread }) => ({
             type: "mrkdwn",
-            text: `\`\`\`${responseTable}\`\`\``,
-          },
-        ],
+            text: `
+*${capitalize(name)}*
+Compra: ${formater.format(+buy.replace(",", "."))} 
+Venta: ${formater.format(+sell.replace(",", "."))} 
+Variacion: ${variation}% 
+Spread: ${spread}`,
+          })
+        ),
       },
     ];
 
