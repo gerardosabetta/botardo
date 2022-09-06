@@ -33,14 +33,13 @@ export const handler: APIGatewayProxyHandler = async (
       {
         type: "section",
         fields: Object.values(dolaritoResponse).map(
-          ({ name, buy, sell, variation, spread }) => ({
+          ({ name, buy, sell, variation }) => ({
             type: "mrkdwn",
             text: `
 *${capitalize(name)}*
 Compra: ${formater.format(+buy.replace(",", "."))} 
 Venta: ${formater.format(+sell.replace(",", "."))} 
-Variacion: ${Number(variation)}% 
-Spread: ${spread}
+Variacion: ${variation || 0}% 
  `, // Intentional gremling
           })
         ),
