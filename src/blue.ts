@@ -40,7 +40,8 @@ export const handler: APIGatewayProxyHandler = async (
 Compra: ${formater.format(+buy.replace(",", "."))} 
 Venta: ${formater.format(+sell.replace(",", "."))} 
 Variacion: ${variation}% 
-Spread: ${spread}`,
+Spread: ${spread}
+ `, // Intentional gremling
           })
         ),
       },
