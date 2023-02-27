@@ -32,8 +32,9 @@ export const handler: APIGatewayProxyHandler = async (
     const responseBlocks: KnownBlock[] = [
       {
         type: "section",
-        fields: Object.values(dolaritoResponse).map(
-          ({ name, buy, sell, variation }) => ({
+        fields: Object.values(dolaritoResponse)
+          .filter(({ name }) => !["dolar tiendadolar"].includes(name))
+          .map(({ name, buy, sell, variation }) => ({
             type: "mrkdwn",
             text: `
 *${capitalize(name)}*
@@ -41,8 +42,7 @@ Compra: ${formater.format(+buy.replace(",", "."))}
 Venta: ${formater.format(+sell.replace(",", "."))} 
 Variacion: ${variation || 0}% 
  `, // Intentional gremling
-          })
-        ),
+          })),
       },
     ];
 
