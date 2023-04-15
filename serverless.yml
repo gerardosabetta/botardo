@@ -17,6 +17,12 @@ functions:
       - http:
           path: blue
           method: any
+  oauth:
+    handler: src/oauth.handler
+    events:
+      - http:
+          path: oauth
+          method: get
 
 plugins:
   - serverless-plugin-typescript
