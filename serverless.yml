@@ -4,8 +4,8 @@ service: botardo
 frameworkVersion: "3"
 provider:
   name: aws
-  runtime: nodejs14.x
-  region: us-west-2
+  runtime: nodejs18.x
+  region: us-east-1
   environment:
     CLIENT_ID: ${env:CLIENT_ID}
     CLIENT_SECRET: ${env:CLIENT_SECRET}
