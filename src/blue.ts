@@ -37,7 +37,7 @@ export const handler: APIGatewayProxyHandler = async (
           .map(({ name, buy, sell, variation }) => ({
             type: "mrkdwn",
             text: `
-*${getName({ name, variation })}*
+*${getName({ name, variation: variation || "0" })}*
 Compra: ${formater.format(+buy.replace(",", "."))} 
 Venta: ${formater.format(+sell.replace(",", "."))} 
 Variacion: ${variation || 0}% 
