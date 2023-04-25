@@ -2,7 +2,7 @@ import axios from "axios";
 import { KnownBlock } from "@slack/types";
 import { DOLARITO_PRICES_URL } from "./constants";
 import { DolaritoResponse } from "./types";
-import { capitalize } from "./utils";
+import { getName } from "./utils";
 import {
   APIGatewayEvent,
   APIGatewayProxyHandler,
@@ -37,7 +37,7 @@ export const handler: APIGatewayProxyHandler = async (
           .map(({ name, buy, sell, variation }) => ({
             type: "mrkdwn",
             text: `
-*${capitalize(name)}*
+*${getName({ name, variation })}*
 Compra: ${formater.format(+buy.replace(",", "."))} 
 Venta: ${formater.format(+sell.replace(",", "."))} 
 Variacion: ${variation || 0}% 
