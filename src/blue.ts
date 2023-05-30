@@ -9,6 +9,11 @@ import {
   APIGatewayProxyResult,
 } from "aws-lambda";
 
+/**
+ * Slack would not send the message if we have more than 10 blocks
+ */
+const MAX_CURRENCIES = 10;
+
 const formater = Intl.NumberFormat("es-AR", {
   style: "currency",
   currency: "ARS",
@@ -33,7 +38,15 @@ export const handler: APIGatewayProxyHandler = async (
       {
         type: "section",
         fields: Object.values(dolaritoResponse)
-          .filter(({ name }) => !["dolar tiendadolar"].includes(name))
+          .filter(
+            ({ name }) =>
+              ![
+                "dolar tiendadolar",
+                "dolar ledes ccl",
+                "dolar ledes mep",
+              ].includes(name)
+          )
+          .slice(0, MAX_CURRENCIES)
           .map(({ name, buy, sell, variation }) => ({
             type: "mrkdwn",
             text: `
