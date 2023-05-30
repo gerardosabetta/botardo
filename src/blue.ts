@@ -1,6 +1,9 @@
 import axios from "axios";
 import { KnownBlock } from "@slack/types";
-import { DOLARITO_PRICES_URL } from "./constants";
+import {
+  DOLARITO_DOLAR_URL,
+  DOLARITO_EURO_URL,
+} from "./constants";
 import { DolaritoResponse } from "./types";
 import { getName } from "./utils";
 import {
@@ -26,12 +29,7 @@ export const handler: APIGatewayProxyHandler = async (
     console.log(event);
     const isEurosRequest = event.body?.includes("euro");
     const { data: dolaritoResponse } = await axios.get<DolaritoResponse>(
-      DOLARITO_PRICES_URL,
-      {
-        params: {
-          currency: isEurosRequest ? "euro" : "dolar",
-        },
-      }
+      isEurosRequest ? DOLARITO_EURO_URL : DOLARITO_DOLAR_URL
     );
 
     const responseBlocks: KnownBlock[] = [
