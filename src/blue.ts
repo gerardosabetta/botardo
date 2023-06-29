@@ -1,9 +1,6 @@
 import axios from "axios";
 import { KnownBlock } from "@slack/types";
-import {
-  DOLARITO_DOLAR_URL,
-  DOLARITO_EURO_URL,
-} from "./constants";
+import { DOLARITO_DOLAR_URL, DOLARITO_EURO_URL } from "./constants";
 import { DolaritoResponse } from "./types";
 import { getName } from "./utils";
 import {
@@ -49,8 +46,8 @@ export const handler: APIGatewayProxyHandler = async (
             type: "mrkdwn",
             text: `
 *${getName({ name, variation: variation || "0" })}*
-Compra: ${formater.format(+buy.replace(",", "."))} 
-Venta: ${formater.format(+sell.replace(",", "."))} 
+Compra: ${formater.format(+(buy || "0").replace(",", "."))} 
+Venta: ${formater.format(+(sell || "0").replace(",", "."))} 
 Variacion: ${variation || 0}% 
  `, // Intentional gremling
           })),
