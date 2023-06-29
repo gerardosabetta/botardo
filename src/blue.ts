@@ -67,6 +67,7 @@ Variacion: ${variation || 0}%
     };
     return response;
   } catch (e) {
+    console.log(e);
     const response = {
       statusCode: 500,
       body: JSON.stringify("Something went wrong"),
