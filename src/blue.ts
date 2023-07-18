@@ -26,7 +26,12 @@ export const handler: APIGatewayProxyHandler = async (
     console.log(event);
     const isEurosRequest = event.body?.includes("euro");
     const { data: dolaritoResponse } = await axios.get<DolaritoResponse>(
-      isEurosRequest ? DOLARITO_EURO_URL : DOLARITO_DOLAR_URL
+      isEurosRequest ? DOLARITO_EURO_URL : DOLARITO_DOLAR_URL,
+      {
+        headers: {
+          "auth-client": process.env.AUTH_CLIENT as string,
+        },
+      }
     );
 
     const responseBlocks: KnownBlock[] = [
