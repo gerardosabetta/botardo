@@ -51,8 +51,8 @@ export const handler: APIGatewayProxyHandler = async (
             type: "mrkdwn",
             text: `
 *${getName({ name, variation: variation || "0" })}*
-Compra: ${formater.format(+(buy.replace(".", "") || "0"))} 
-Venta: ${formater.format(+(sell.replace(".", "") || "0"))} 
+Compra: ${formater.format(+(buy || "0").replace(".", ""))} 
+Venta: ${formater.format(+(sell || "0").replace(".", ""))} 
 Variacion: ${variation || 0}% 
  `, // Intentional gremling
           })),
