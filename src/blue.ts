@@ -48,14 +48,14 @@ export const handler: APIGatewayProxyHandler = async (
           )
           .slice(0, MAX_CURRENCIES)
           .map(({ name, buy, sell, variation }) => {
-            const fixString = (value = "0") => /\d+,\d{2}/.test(value) ? value.replace(",", ".") : value.replace(".", "");
+            const fixString = value => /\d+,\d{2}/.test(value) ? value.replace(",", ".") : value.replace(".", "");
 
             return {
               type: "mrkdwn",
               text: `
 *${getName({ name, variation: variation || "0" })}*
-Compra: ${formater.format(+fixString(buy))} 
-Venta: ${formater.format(+fixString(sell))} 
+Compra: ${formater.format(+fixString(buy ?? "0"))} 
+Venta: ${formater.format(+fixString(sell ?? "0"))} 
 Variacion: ${variation || 0}% 
  `, // Intentional gremling
             };
